@@ -27,8 +27,7 @@ app.use(cookieParser());
 const corsOption={
     origin: [
         'http://localhost:5173', 
-        'https://job-portal-application-mern-wide.vercel.app',
-        'https://job-portal-application-mern-production.up.railway.app'
+        'https://job-portal-application-mern-wide.vercel.app'
     ],
     credentials:true
 }

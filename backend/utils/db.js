@@ -1,11 +1,17 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-const connectDB= async ()=>{
+dotenv.config();
+
+const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://sufyanadnan125:zfaCud1EghUeLlny@cluster0.o19mv.mongodb.net/");
-        console.log("MongoDb connected successfully");
+        const mongoURI = process.env.MONGODB_URI || "mongodb+srv://sufyanadnan125:zfaCud1EghUeLlny@cluster0.o19mv.mongodb.net/";
+        await mongoose.connect(mongoURI);
+        console.log("MongoDB connected successfully");
     } catch (error) {
-        console.log("error");
+        console.log("MongoDB connection error:", error.message);
+        process.exit(1);
     }
 }
+
 export default connectDB;
