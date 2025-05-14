@@ -8,58 +8,29 @@ A full-stack job portal application where users can find and create jobs. Built 
 - Apply for jobs
 - Company and job management (admin)
 - User profile management
-
-## Project Structure
-- `/frontend` - React + Vite frontend
-- `/backend` - Express.js backend API
-
----
-
-## Getting Started
-
-### Prerequisites
-- Node.js (v18+ recommended)
-- npm or yarn
-- MongoDB database (local or Atlas)
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/sufyansidd19/Job-Portal-Application-MERN-.git
-cd Job-Portal-Application-MERN-
-```
-
-### 2. Backend Setup
-```bash
-cd backend
-npm install
-```
-
-#### Start Backend
-```bash
-npm run dev
-```
-
-### 3. Frontend Setup
-```bash
-cd ../frontend
-npm install
-```
-
-#### Start Frontend
-```bash
-npm run dev
-```
-The frontend will run on [http://localhost:5173](http://localhost:5173) by default.
-
----
-
-## Usage
-- Visit the frontend URL to register, login, browse jobs, and manage your profile.
-- Admin users can manage companies and job postings.
+- Real-time job application tracking
+- Responsive design for all devices
 
 ## Tech Stack
-- **Frontend:** React, Vite, Tailwind CSS, Redux Toolkit, Radix UI
-- **Backend:** Node.js, Express, MongoDB (Mongoose), Cloudinary, JWT Auth
+- **Frontend:** 
+  - React + Vite
+  - Tailwind CSS
+  - Redux Toolkit
+  - Radix UI Components
+  - Axios for API calls
+  - React Router for navigation
+
+- **Backend:**
+  - Node.js + Express
+  - MongoDB with Mongoose
+  - JWT Authentication
+  - Cloudinary for image uploads
+  - Nodemailer for emails
+  - Cookie-based sessions
+
+## Deployment
+- **Frontend:** [Vercel](https://jobby-wheat.vercel.app)
+- **Backend:** [Railway](https://job-portal-application-mern-production-3618.up.railway.app)
 
 ## License
 [ISC](LICENSE)
