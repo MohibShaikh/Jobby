@@ -29,7 +29,7 @@ const Login = () => {
         e.preventDefault();
         try {
             dispatch(setLoading(true)); // loading animation
-            const res = await axios.post("http://localhost:8000/api/v1/user/login", input, {
+            const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: { "Content-Type": "application/json" },
                 withCredentials: true,
             });
@@ -40,7 +40,7 @@ const Login = () => {
             }
         } catch (error) {
             console.log(error);
-            // toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message || "Login failed");
         } finally {
             dispatch(setLoading(false))
         }
