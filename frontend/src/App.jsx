@@ -14,7 +14,9 @@ import CompanySetup from './components/admin/CompanySetup'
 import AdminJobs from './components/admin/AdminJobs'
 import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
-import ProtectedRoute from './components/ProtectedRoute'
+
+
+
 
 const appRouter = createBrowserRouter([
   {
@@ -43,64 +45,37 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: (
-      <ProtectedRoute>
-        <Profile />
-      </ProtectedRoute>
-    )
+    element: <Profile />
   },
-  // admin routes
+  // admin site from here 
   {
-    path: "/admin/companies",
-    element: (
-      <ProtectedRoute allowedRoles={['recruiter']}>
-        <Companies />
-      </ProtectedRoute>
-    )
+    path:"/admin/companies",
+    element:<Companies/>
   },
   {
-    path: "/admin/companies/create",
-    element: (
-      <ProtectedRoute allowedRoles={['recruiter']}>
-        <CompanyCreate />
-      </ProtectedRoute>
-    )
+    path:"/admin/companies/create",
+    element:<CompanyCreate/>
   },
   {
-    path: "/admin/companies/:id",
-    element: (
-      <ProtectedRoute allowedRoles={['recruiter']}>
-        <CompanySetup />
-      </ProtectedRoute>
-    )
+    path:"/admin/companies/:id",
+    element:<CompanySetup/>
   },
   {
-    path: "/admin/jobs",
-    element: (
-      <ProtectedRoute allowedRoles={['recruiter']}>
-        <AdminJobs />
-      </ProtectedRoute>
-    )
+    path:"/admin/jobs",
+    element:<AdminJobs/>
   },
   {
-    path: "/admin/jobs/create",
-    element: (
-      <ProtectedRoute allowedRoles={['recruiter']}>
-        <PostJob />
-      </ProtectedRoute>
-    )
+    path:"/admin/jobs/create",
+    element:<PostJob/>
   },
   {
-    path: "/admin/jobs/:id/applicants",
-    element: (
-      <ProtectedRoute allowedRoles={['recruiter']}>
-        <Applicants />
-      </ProtectedRoute>
-    )
+    path:"/admin/jobs/:id/applicants",
+    element:<Applicants/>
   }
-]);
 
+])
 function App() {
+
   return (
     <div>
       <RouterProvider router={appRouter} />

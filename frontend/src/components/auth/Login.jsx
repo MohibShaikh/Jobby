@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import axios from 'axios'
 import { USER_API_END_POINT } from '../utils/constant'
 import { useDispatch, useSelector } from 'react-redux'
-import { setLoading, setUser, setToken } from '../../redux/authSlice'
+import { setLoading, setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
 
 const Login = () => {
@@ -20,47 +20,30 @@ const Login = () => {
     });
     const { loading } = useSelector(store => store.auth);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
+    const dispatch = useDispatch()
     const changeEventHandler = (e) => {
         setinput({ ...input, [e.target.name]: e.target.value });
     }
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        if (!input.email || !input.password || !input.role) {
-            toast.error('Please fill in all fields');
-            return;
-        }
-
         try {
-            dispatch(setLoading(true));
+            dispatch(setLoading(true)); // loading animation
             const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: { "Content-Type": "application/json" },
                 withCredentials: true,
             });
-            
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
-                dispatch(setToken(res.data.token));
-                
-                // Set default authorization header for all future requests
-                axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
-                
-                toast.success(res.data.message);
-                
-                // Redirect based on role
-                if (res.data.user.role === 'recruiter') {
-                    navigate("/admin/companies");
-                } else {
-                    navigate("/");
-                }
+                localStorage.setItem('token', res.data.token);
+                navigate("/")
+                toast.success(res.data.message)
             }
         } catch (error) {
-            console.error('Login error:', error);
+            console.log(error);
             toast.error(error.response?.data?.message || "Login failed");
         } finally {
-            dispatch(setLoading(false));
+            dispatch(setLoading(false))
         }
     }
 
@@ -79,7 +62,6 @@ const Login = () => {
                             name="email"
                             onChange={changeEventHandler}
                             placeholder="sufyan1234@gmail.com"
-                            required
                         />
                     </div>
 
@@ -91,31 +73,25 @@ const Login = () => {
                             name="password"
                             onChange={changeEventHandler}
                             placeholder="****"
-                            required
                         />
                     </div>
+
 
                     <div className="flex items-center justify-between">
                         <RadioGroup className='flex items-center gap-4 my-2'>
                             <div className="flex items-center space-x-2">
                                 <Input
-                                    type="radio" 
-                                    name="role" 
-                                    value="student"
+                                    type="radio" name="role" value="student"
                                     checked={input.role === 'student'}
                                     onChange={changeEventHandler}
-                                    required
                                 />
                                 <Label htmlFor="option-one">Student</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Input
-                                    type="radio" 
-                                    name="role" 
-                                    value="recruiter"
+                                    type="radio" name="role" value="recruiter"
                                     checked={input.role === 'recruiter'}
                                     onChange={changeEventHandler}
-                                    required
                                 />
                                 <Label htmlFor="option-two">Recruiter</Label>
                             </div>
