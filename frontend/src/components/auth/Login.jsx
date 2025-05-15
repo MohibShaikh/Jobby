@@ -35,7 +35,7 @@ const Login = () => {
             });
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
-                localStorage.setItem('token', res.data.token);
+                document.cookie = `token=${res.data.token}; path=/`;
                 navigate("/")
                 toast.success(res.data.message)
             }

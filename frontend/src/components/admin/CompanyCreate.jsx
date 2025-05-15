@@ -28,8 +28,7 @@ const CompanyCreate = () => {
                 { companyName }, 
                 {
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                        'Content-Type': 'application/json'
                     },
                     withCredentials: true
                 }
