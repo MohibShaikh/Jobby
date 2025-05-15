@@ -3,7 +3,7 @@
 A full-stack job portal application where users can find and create jobs. Built with the MERN stack (MongoDB, Express, React, Node.js).
 
 ## Features
-- User authentication (register, login, logout)
+- User authentication (register, login, logout) 
 - Browse and search jobs
 - Apply for jobs
 - Company and job management (admin)
@@ -11,7 +11,7 @@ A full-stack job portal application where users can find and create jobs. Built 
 
 ## Project Structure
 - `/frontend` - React + Vite frontend
-- `/backend` - Express.js backend API
+- `/backend` - Express.js backend API .
 
 ## Live Demo
 - Frontend: [https://jobby-wheat.vercel.app](https://jobby-wheat.vercel.app)
