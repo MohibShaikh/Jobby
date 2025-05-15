@@ -26,7 +26,11 @@ app.use(cookieParser());
 
 const corsOption = {
     origin: process.env.NODE_ENV === 'production' 
-        ? ['https://jobby-wheat.vercel.app', 'https://jobby-ez57p6ysk-mohibzzs-projects.vercel.app']
+        ? [
+            'https://jobby-wheat.vercel.app',
+            'https://jobby-ez57p6ysk-mohibzzs-projects.vercel.app',
+            'https://jobby-ipcgfxnpn-mohibzzs-projects.vercel.app'
+        ]
         : 'http://localhost:5173',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
