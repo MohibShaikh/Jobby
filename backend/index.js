@@ -32,11 +32,12 @@ app.use((req, res, next) => {
 });
 
 const corsOption={
-    origin: 'https://jobby-gdq7myigt-mohibzzs-projects.vercel.app', // Your frontend URL
+    origin: process.env.NODE_ENV === 'production' 
+        ? ['https://jobby-wheat.vercel.app', 'https://jobby-ez57p6ysk-mohibzzs-projects.vercel.app']
+        : 'http://localhost:5173',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['Set-Cookie']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }
 app.use(cors(corsOption))
 

@@ -7,47 +7,31 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'sonner'
 import { useDispatch } from 'react-redux'
-import { setSingleCompany } from '../../redux/companySlice'
+import { setSingleCompany } from '@/redux/companySlice'
 import { COMPANY_API_END_POINT } from '../utils/constant'
 
 const CompanyCreate = () => {
     const navigate = useNavigate();
-    const [companyName, setCompanyName] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [companyName, setCompanyName] = useState();
     const dispatch = useDispatch();
-
     const registerNewCompany = async () => {
-        if (!companyName?.trim()) {
-            toast.error('Please enter a company name');
-            return;
-        }
-
-        setIsLoading(true);
         try {
-            const res = await axios.post(`${COMPANY_API_END_POINT}/register`, 
-                { companyName }, 
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials: true
-                }
-            );
-            
-            if (res?.data?.success) {
+            const res = await axios.post(`${COMPANY_API_END_POINT}/register`, {companyName}, {
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                withCredentials:true
+            });
+            if(res?.data?.success){
                 dispatch(setSingleCompany(res.data.company));
                 toast.success(res.data.message);
                 const companyId = res?.data?.company?._id;
                 navigate(`/admin/companies/${companyId}`);
             }
         } catch (error) {
-            console.error('Error creating company:', error);
-            toast.error(error?.response?.data?.message || 'Failed to create company');
-        } finally {
-            setIsLoading(false);
+            console.log(error);
         }
     }
-
     return (
         <div>
             <Navbar />
@@ -62,18 +46,11 @@ const CompanyCreate = () => {
                     type="text"
                     className="my-2"
                     placeholder="JobHunt, Microsoft etc."
-                    value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                 />
                 <div className='flex items-center gap-2 my-10'>
                     <Button variant="outline" onClick={() => navigate("/admin/companies")}>Cancel</Button>
-                    <Button 
-                        className='bg-black text-white' 
-                        onClick={registerNewCompany}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? 'Creating...' : 'Continue'}
-                    </Button>
+                    <Button className='bg-black text-white' onClick={registerNewCompany}>Continue</Button>
                 </div>
             </div>
         </div>
