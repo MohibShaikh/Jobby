@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 import { useSelector } from 'react-redux'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { SelectGroup } from '@radix-ui/react-select'
-import axiosInstance from '@/lib/axios'
+import axios from 'axios'
 import { JOB_API_END_POINT } from '../utils/constant'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
@@ -44,18 +44,32 @@ const PostJob = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
+        
+        // Validate required fields
+        if (!input.title || !input.description || !input.requirements || !input.salary || 
+            !input.location || !input.jobType || !input.experience || !input.position || !input.companyId) {
+            toast.error("Please fill in all required fields");
+            return;
+        }
+
         try {
             setLoading(true);
-            const res = await axiosInstance.post(`${JOB_API_END_POINT}/post`, input);
+            const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            });
             if (res.data.success) {
                 toast.success(res.data.message);
                 navigate('/admin/jobs');
             }
         }
         catch (error) {
+            console.log(error);
             toast.error(error.response?.data?.message || "Failed to post job");
         }
-        finally {
+        finally{
             setLoading(false);
         }
     }
