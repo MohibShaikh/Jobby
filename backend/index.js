@@ -32,8 +32,8 @@ app.use((req, res, next) => {
 });
 
 const corsOption={
-    origin: true, // Allow all origins in development
-    credentials:true,
+    origin: ['http://localhost:5173', 'https://jobby-git-main-mohibzzs-projects.vercel.app'],
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }
