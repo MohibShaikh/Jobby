@@ -24,20 +24,21 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
-const corsOption = {
-    origin: process.env.NODE_ENV === 'production' 
-        ? [
-            'https://jobby-wheat.vercel.app',
-            'https://jobby-ez57p6ysk-mohibzzs-projects.vercel.app',
-            'https://jobby-ipcgfxnpn-mohibzzs-projects.vercel.app'
-        ]
-        : 'http://localhost:5173',
-    credentials: true,
+// Cookie configuration
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
+});
+
+const corsOption={
+    origin: true, // Allow all origins in development
+    credentials:true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['Set-Cookie']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
 }
 app.use(cors(corsOption))
+
 
 const PORT=process.env.PORT || 3000;
 

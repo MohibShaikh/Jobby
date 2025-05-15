@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 import { useSelector } from 'react-redux'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { SelectGroup } from '@radix-ui/react-select'
-import axios from 'axios'
+import axiosInstance from '@/lib/axios'
 import { JOB_API_END_POINT } from '../utils/constant'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
@@ -46,21 +46,16 @@ const PostJob = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                withCredentials: true
-            });
+            const res = await axiosInstance.post(`${JOB_API_END_POINT}/post`, input);
             if (res.data.success) {
                 toast.success(res.data.message);
                 navigate('/admin/jobs');
             }
         }
         catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message || "Failed to post job");
         }
-        finally{
+        finally {
             setLoading(false);
         }
     }
