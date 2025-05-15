@@ -35,7 +35,6 @@ const Login = () => {
             });
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
-                document.cookie = `token=${res.data.token}; path=/`;
                 navigate("/")
                 toast.success(res.data.message)
             }
