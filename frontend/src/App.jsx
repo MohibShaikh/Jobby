@@ -14,9 +14,7 @@ import CompanySetup from './components/admin/CompanySetup'
 import AdminJobs from './components/admin/AdminJobs'
 import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
-
-
-
+import ProtectedRoute from './components/ProtectedRoute'
 
 const appRouter = createBrowserRouter([
   {
@@ -45,37 +43,64 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <Profile />
+    element: (
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    )
   },
-  // admin site from here 
+  // admin routes
   {
-    path:"/admin/companies",
-    element:<Companies/>
-  },
-  {
-    path:"/admin/companies/create",
-    element:<CompanyCreate/>
-  },
-  {
-    path:"/admin/companies/:id",
-    element:<CompanySetup/>
-  },
-  {
-    path:"/admin/jobs",
-    element:<AdminJobs/>
+    path: "/admin/companies",
+    element: (
+      <ProtectedRoute allowedRoles={['recruiter']}>
+        <Companies />
+      </ProtectedRoute>
+    )
   },
   {
-    path:"/admin/jobs/create",
-    element:<PostJob/>
+    path: "/admin/companies/create",
+    element: (
+      <ProtectedRoute allowedRoles={['recruiter']}>
+        <CompanyCreate />
+      </ProtectedRoute>
+    )
   },
   {
-    path:"/admin/jobs/:id/applicants",
-    element:<Applicants/>
+    path: "/admin/companies/:id",
+    element: (
+      <ProtectedRoute allowedRoles={['recruiter']}>
+        <CompanySetup />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/admin/jobs",
+    element: (
+      <ProtectedRoute allowedRoles={['recruiter']}>
+        <AdminJobs />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/admin/jobs/create",
+    element: (
+      <ProtectedRoute allowedRoles={['recruiter']}>
+        <PostJob />
+      </ProtectedRoute>
+    )
+  },
+  {
+    path: "/admin/jobs/:id/applicants",
+    element: (
+      <ProtectedRoute allowedRoles={['recruiter']}>
+        <Applicants />
+      </ProtectedRoute>
+    )
   }
+]);
 
-])
 function App() {
-
   return (
     <div>
       <RouterProvider router={appRouter} />
