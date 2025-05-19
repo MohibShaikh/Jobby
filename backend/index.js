@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 const corsOption = {
-    origin: ["http://localhost:5173", "https://jobby-mohibzzs-projects.vercel.app"],
+    origin: ["http://localhost:5173", "https://jobby-git-main-mohibzzs-projects.vercel.app"],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
