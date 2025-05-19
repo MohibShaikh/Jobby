@@ -31,11 +31,12 @@ app.use((req, res, next) => {
     next();
 });
 
-const corsOption={
-    origin: true, // Allow all origins in development
-    credentials:true,
+const corsOption = {
+    origin: ["http://localhost:5173", "https://jobby-mohibzzs-projects.vercel.app"],
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['Set-Cookie']
 }
 app.use(cors(corsOption))
 
